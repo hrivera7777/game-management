@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateGameDto {
   @IsNotEmpty()
@@ -6,7 +6,8 @@ export class CreateGameDto {
   @IsOptional()
   genre: string;
   @IsNotEmpty()
-  price: string;
+  price: number;
   @IsNotEmpty()
+  @IsString()
   fileName: string;
 }

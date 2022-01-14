@@ -9,7 +9,7 @@ export class UpdateGameDto {
   genre: string;
   @IsOptional()
   @IsNumber()
-  price: string;
+  price: number;
   @IsOptional()
   @IsString()
   fileName: string;

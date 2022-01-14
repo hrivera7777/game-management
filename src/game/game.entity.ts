@@ -9,7 +9,7 @@ export class Game {
   @Column()
   genre: string;
   @Column({ type: 'bigint' })
-  price: string;
+  price: number;
   @Column()
   fileName: string;
 }
