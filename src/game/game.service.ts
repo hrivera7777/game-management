@@ -12,7 +12,7 @@ export class GameService {
   createGame(createGameDto: CreateGameDto): Promise<Game> {
     return this.gamesRepository.createGame(createGameDto);
   }
-  getGames(): Promise<Game[]> {
-    return this.gamesRepository.find();
+  async getGames(): Promise<Game[]> {
+    return await this.gamesRepository.find();
   }
 }
