@@ -1,7 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { response } from 'express';
-import { json } from 'stream/consumers';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
 import { Game } from './game.entity';
@@ -26,5 +24,12 @@ export class GameService {
       throw new NotFoundException(`The game with id: ${id} not found`);
     }
     return await this.gamesRepository.findOne({ id });
+  }
+  async deleteGame(id: string): Promise<void> {
+    const { affected } = await this.gamesRepository.delete({ id });
+
+    if (!affected) {
+      throw new NotFoundException(`The game with id: ${id} not found`);
+    }
   }
 }
