@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CreateGameDto } from './dto/create-game.dto';
 import { Game } from './game.entity';
 import { GameService } from './game.service';
@@ -9,5 +9,9 @@ export class GameController {
   @Post()
   createGame(@Body() createGameDto: CreateGameDto): Promise<Game> {
     return this.gamesService.createGame(createGameDto);
+  }
+  @Get()
+  getGames(): Promise<Game[]> {
+    return this.gamesService.getGames();
   }
 }
