@@ -6,13 +6,16 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
 import { Game } from './game.entity';
 import { GameService } from './game.service';
 
 @Controller('game')
+@UseGuards(AuthGuard())
 export class GameController {
   constructor(private gamesService: GameService) {}
   @Post()
@@ -23,6 +26,7 @@ export class GameController {
   getGames(): Promise<Game[]> {
     return this.gamesService.getGames();
   }
+
   @Patch(':id')
   updateGame(
     @Param('id') id: string,
