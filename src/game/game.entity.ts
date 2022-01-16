@@ -11,5 +11,5 @@ export class Game {
   @Column({ type: 'bigint' })
   price: number;
   @Column()
-  fileName: string;
+  filename: string;
 }
