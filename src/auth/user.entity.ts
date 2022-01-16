@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Game } from 'src/game/game.entity';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class User {
@@ -12,4 +19,7 @@ export class User {
   email: string;
   @Column()
   password: string;
+  @ManyToMany(() => Game)
+  @JoinTable()
+  games: Game[];
 }
