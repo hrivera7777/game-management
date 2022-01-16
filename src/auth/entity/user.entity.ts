@@ -4,8 +4,10 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Role } from './role.entity';
 
 @Entity()
 export class User {
@@ -22,4 +24,6 @@ export class User {
   @ManyToMany(() => Game)
   @JoinTable()
   games: Game[];
+  @ManyToOne(() => Role, (role) => role.users)
+  role: Role;
 }
