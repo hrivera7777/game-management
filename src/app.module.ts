@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { getConnectionOptions } from 'typeorm';
 import { GameModule } from './game/game.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { GameModule } from './game/game.module';
           autoLoadEntities: true,
         }),
     }),
+    AuthModule,
   ],
 })
 export class AppModule {}
