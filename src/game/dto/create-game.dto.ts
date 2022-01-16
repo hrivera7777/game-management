@@ -9,5 +9,5 @@ export class CreateGameDto {
   price: number;
   @IsNotEmpty()
   @IsString()
-  fileName: string;
+  filename: string;
 }
