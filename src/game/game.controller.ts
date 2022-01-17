@@ -15,12 +15,14 @@ import { UpdateGameDto } from './dto/update-game.dto';
 import { Game } from './game.entity';
 import { GameService } from './game.service';
 import { RolesGuard } from 'src/auth/roles.guard';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('game')
-@UseGuards(RolesGuard)
+@UseGuards(AuthGuard())
 export class GameController {
   constructor(private gamesService: GameService) {}
   @Roles(UserRole.ADMIN)
+  @UseGuards(RolesGuard)
   @Post()
   createGame(@Body() createGameDto: CreateGameDto): Promise<Game> {
     return this.gamesService.createGame(createGameDto);
@@ -29,8 +31,8 @@ export class GameController {
   getGames(): Promise<Game[]> {
     return this.gamesService.getGames();
   }
-
   @Roles(UserRole.ADMIN)
+  @UseGuards(RolesGuard)
   @Patch(':id')
   updateGame(
     @Param('id') id: string,
@@ -39,6 +41,7 @@ export class GameController {
     return this.gamesService.updateGame(id, updateGameDto);
   }
   @Roles(UserRole.ADMIN)
+  @UseGuards(RolesGuard)
   @Delete(':id')
   deleteGame(@Param('id') id: string): Promise<void> {
     return this.gamesService.deleteGame(id);
