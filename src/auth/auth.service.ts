@@ -7,17 +7,24 @@ import { UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './jwt-payload.interface';
 import * as bcrypt from 'bcrypt';
+import { RolesRepository } from './repository/role.repository';
+import { UserRole } from './role.enum';
+import { Role } from './entity/role.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(UsersRepository)
     private usersRepository: UsersRepository,
+    @InjectRepository(RolesRepository) private rolesRepository: RolesRepository,
     private jwtService: JwtService,
   ) {}
 
-  signUp(signUpDto: SignUpDto): Promise<void> {
-    return this.usersRepository.createUser(signUpDto);
+  async signUp(signUpDto: SignUpDto): Promise<void> {
+    const role: Role = await this.rolesRepository.findOne({
+      name: UserRole.USER,
+    });
+    return this.usersRepository.createUser(signUpDto, role);
   }
 
   async signIn(signInDto: SignInDto): Promise<{ accessToken: string }> {
