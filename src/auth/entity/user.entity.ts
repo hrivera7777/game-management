@@ -24,6 +24,6 @@ export class User {
   @ManyToMany(() => Game)
   @JoinTable()
   games: Game[];
-  @ManyToOne(() => Role, (role) => role.users)
+  @ManyToOne(() => Role, (role) => role.users, { eager: true })
   role: Role;
 }
