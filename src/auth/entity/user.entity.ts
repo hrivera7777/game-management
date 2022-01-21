@@ -5,9 +5,11 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Role } from './role.entity';
+import { Favorite } from 'src/favorite/entities/favorite.entity';
 
 @Entity()
 export class User {
@@ -26,4 +28,6 @@ export class User {
   games: Game[];
   @ManyToOne(() => Role, (role) => role.users, { eager: true })
   role: Role;
+  @OneToMany(() => Favorite, (favorite) => favorite.user)
+  favorites: Favorite[];
 }
