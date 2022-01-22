@@ -31,7 +31,7 @@ export class Favorite {
   updatedat: string;
   @ManyToOne(() => User, (user) => user.favorites)
   user: User;
-  @ManyToMany(() => Game)
+  @ManyToMany(() => Game, { eager: true })
   @JoinTable()
   games: Game[];
 }
