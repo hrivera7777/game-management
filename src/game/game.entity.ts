@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Favorite } from 'src/favorite/entities/favorite.entity';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Game {
@@ -12,4 +13,6 @@ export class Game {
   price: number;
   @Column()
   filename: string;
+  @ManyToMany(() => Favorite, (favorite) => favorite.games)
+  favorites: Favorite[];
 }
