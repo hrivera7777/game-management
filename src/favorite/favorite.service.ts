@@ -45,7 +45,10 @@ export class FavoriteService {
     return favorite;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} favorite`;
+  async remove(user: User, id: string): Promise<void> {
+    const { affected } = await this.favoritesRepository.delete({ id, user });
+    if (!affected) {
+      throw new NotFoundException(`Favorite list with id: ${id} not found`);
+    }
   }
 }

@@ -49,7 +49,7 @@ export class FavoriteController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.favoriteService.remove(+id);
+  remove(@GetUser() user: User, @Param('id') id: string): Promise<void> {
+    return this.favoriteService.remove(user, id);
   }
 }
