@@ -26,6 +26,7 @@ export class FavoriteService {
   async findOne(user: User, id: string): Promise<Favorite> {
     const favorite: Favorite = await this.favoritesRepository.findOne(id, {
       where: { user: user },
+      relations: ['games'],
     });
     if (!favorite) {
       throw new NotFoundException(`Favorite list with id: ${id} not found`);
