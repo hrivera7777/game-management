@@ -30,8 +30,8 @@ export class FavoriteController {
   }
 
   @Get()
-  findAll() {
-    return this.favoriteService.findAll();
+  getFavorites(@GetUser() user: User): Promise<Favorite[]> {
+    return this.favoriteService.getFavorites(user);
   }
 
   @Get(':id')

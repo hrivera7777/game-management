@@ -19,8 +19,8 @@ export class FavoriteService {
     return this.favoritesRepository.createFavorite(createFavoriteDto, user);
   }
 
-  findAll() {
-    return `This action returns all favorite`;
+  async getFavorites(user: User): Promise<Favorite[]> {
+    return await this.favoritesRepository.find({ user });
   }
 
   findOne(id: number) {
