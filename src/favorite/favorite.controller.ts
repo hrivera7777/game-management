@@ -41,10 +41,11 @@ export class FavoriteController {
 
   @Patch(':id')
   update(
+    @GetUser() user: User,
     @Param('id') id: string,
     @Body() updateFavoriteDto: UpdateFavoriteDto,
-  ) {
-    return this.favoriteService.update(+id, updateFavoriteDto);
+  ): Promise<Favorite> {
+    return this.favoriteService.update(user, id, updateFavoriteDto);
   }
 
   @Delete(':id')

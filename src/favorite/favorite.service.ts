@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/auth/entity/user.entity';
 import { CreateFavoriteDto } from './dto/create-favorite.dto';
@@ -33,8 +33,16 @@ export class FavoriteService {
     return favorite;
   }
 
-  update(id: number, updateFavoriteDto: UpdateFavoriteDto) {
-    return `This action updates a #${id} favorite`;
+  async update(
+    user: User,
+    id: string,
+    updateFavoriteDto: UpdateFavoriteDto,
+  ): Promise<Favorite> {
+    const favorite: Favorite = await this.findOne(user, id);
+    Object.assign(favorite, updateFavoriteDto);
+    this.favoritesRepository.save(favorite);
+
+    return favorite;
   }
 
   remove(id: number) {
