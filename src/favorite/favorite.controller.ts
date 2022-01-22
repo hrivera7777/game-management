@@ -35,8 +35,8 @@ export class FavoriteController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.favoriteService.findOne(+id);
+  findOne(@GetUser() user: User, @Param('id') id: string): Promise<Favorite> {
+    return this.favoriteService.findOne(user, id);
   }
 
   @Patch(':id')

@@ -23,8 +23,14 @@ export class FavoriteService {
     return await this.favoritesRepository.find({ user });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} favorite`;
+  async findOne(user: User, id: string): Promise<Favorite> {
+    const favorite: Favorite = await this.favoritesRepository.findOne(id, {
+      where: { user: user },
+    });
+    if (!favorite) {
+      throw new NotFoundException(`Favorite list with id: ${id} not found`);
+    }
+    return favorite;
   }
 
   update(id: number, updateFavoriteDto: UpdateFavoriteDto) {
