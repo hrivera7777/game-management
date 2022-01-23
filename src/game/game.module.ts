@@ -9,5 +9,6 @@ import { GameService } from './game.service';
   controllers: [GameController],
   imports: [TypeOrmModule.forFeature([GamesRepository]), AuthModule],
   providers: [GameService],
+  exports: [GameService],
 })
 export class GameModule {}

@@ -4,6 +4,8 @@ import { getConnectionOptions } from 'typeorm';
 import { GameModule } from './game/game.module';
 import { AuthModule } from './auth/auth.module';
 import { FavoriteModule } from './favorite/favorite.module';
+import { ReportModule } from './report/report.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -16,6 +18,8 @@ import { FavoriteModule } from './favorite/favorite.module';
     }),
     AuthModule,
     FavoriteModule,
+    ReportModule,
+    UserModule,
   ],
 })
 export class AppModule {}

@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/auth/entity/user.entity';
+import { User } from 'src/user/entities/user.entity';
 import { CreateFavoriteDto } from './dto/create-favorite.dto';
 import { UpdateFavoriteDto } from './dto/update-favorite.dto';
 import { Favorite } from './entities/favorite.entity';
@@ -26,6 +26,7 @@ export class FavoriteService {
   async findOne(user: User, id: string): Promise<Favorite> {
     const favorite: Favorite = await this.favoritesRepository.findOne(id, {
       where: { user: user },
+      relations: ['games'],
     });
     if (!favorite) {
       throw new NotFoundException(`Favorite list with id: ${id} not found`);

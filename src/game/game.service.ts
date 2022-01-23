@@ -16,6 +16,10 @@ export class GameService {
   async getGames(): Promise<Game[]> {
     return await this.gamesRepository.find();
   }
+
+  async getGamesWithLists(): Promise<Game[]> {
+    return await this.gamesRepository.find({ relations: ['favorites'] });
+  }
   async updateGame(id: string, updateGameDto: UpdateGameDto): Promise<Game> {
     const { affected } = await this.gamesRepository.update(id, {
       ...updateGameDto,
