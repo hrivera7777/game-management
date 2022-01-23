@@ -8,7 +8,6 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { UserRole } from 'src/auth/role.enum';
 import { Roles } from 'src/auth/decorator/roles.decorator';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
@@ -16,6 +15,7 @@ import { Game } from './game.entity';
 import { GameService } from './game.service';
 import { RolesGuard } from 'src/auth/roles.guard';
 import { AuthGuard } from '@nestjs/passport';
+import { UserRole } from 'src/user/role.enum';
 
 @Controller('game')
 export class GameController {

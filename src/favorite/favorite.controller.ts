@@ -13,8 +13,8 @@ import { CreateFavoriteDto } from './dto/create-favorite.dto';
 import { UpdateFavoriteDto } from './dto/update-favorite.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { Favorite } from './entities/favorite.entity';
-import { User } from 'src/auth/entity/user.entity';
 import { GetUser } from 'src/auth/decorator/get-user.decorator';
+import { User } from 'src/user/entities/user.entity';
 
 @UseGuards(AuthGuard())
 @Controller('favorite')

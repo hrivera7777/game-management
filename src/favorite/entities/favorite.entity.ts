@@ -6,8 +6,8 @@ import {
   ManyToMany,
   JoinTable,
 } from 'typeorm';
-import { User } from 'src/auth/entity/user.entity';
 import { Game } from 'src/game/game.entity';
+import { User } from 'src/user/entities/user.entity';
 
 @Entity()
 export class Favorite {

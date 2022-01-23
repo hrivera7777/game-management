@@ -1,9 +1,9 @@
 import { EntityRepository, Repository } from 'typeorm';
-import { User } from './../entity/user.entity';
-import { SignUpDto } from './../dto/signup.dto';
+import { User } from './../entities/user.entity';
 import { InternalServerErrorException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { Role } from './../entity/role.entity';
+import { Role } from './../entities/role.entity';
+import { SignUpDto } from 'src/auth/dto/signup.dto';
 
 @EntityRepository(User)
 export class UsersRepository extends Repository<User> {
