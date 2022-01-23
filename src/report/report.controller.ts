@@ -17,9 +17,9 @@ export class ReportController {
     return this.reportService.getMostAddedGame();
   }
 
-  // @Roles(UserRole.ADMIN)
-  // @Get()
-  // getUserWithMostLists(): Promise<User> {
-  //   return this.reportService.getUserWithMostLists();
-  // }
+  @Roles(UserRole.ADMIN)
+  @Get('registered-users')
+  getUsers(): Promise<User[]> {
+    return this.reportService.getUsers();
+  }
 }
