@@ -12,7 +12,7 @@ export class ReportController {
   constructor(private reportService: ReportService) {}
 
   @Roles(UserRole.ADMIN)
-  @Get()
+  @Get('most-added-game')
   getMostAddedGame(): Promise<Game> {
     return this.reportService.getMostAddedGame();
   }
