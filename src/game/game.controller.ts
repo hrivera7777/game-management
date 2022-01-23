@@ -18,11 +18,11 @@ import { RolesGuard } from 'src/auth/roles.guard';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('game')
-@UseGuards(AuthGuard())
 export class GameController {
   constructor(private gamesService: GameService) {}
   @Roles(UserRole.ADMIN)
   @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard())
   @Post()
   createGame(@Body() createGameDto: CreateGameDto): Promise<Game> {
     return this.gamesService.createGame(createGameDto);
@@ -31,6 +31,7 @@ export class GameController {
   getGames(): Promise<Game[]> {
     return this.gamesService.getGames();
   }
+  @UseGuards(AuthGuard())
   @Roles(UserRole.ADMIN)
   @UseGuards(RolesGuard)
   @Patch(':id')
@@ -40,6 +41,7 @@ export class GameController {
   ): Promise<Game> {
     return this.gamesService.updateGame(id, updateGameDto);
   }
+  @UseGuards(AuthGuard())
   @Roles(UserRole.ADMIN)
   @UseGuards(RolesGuard)
   @Delete(':id')
