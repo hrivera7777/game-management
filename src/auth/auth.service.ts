@@ -22,7 +22,9 @@ export class AuthService {
     const { username, password } = signInDto;
     const user = await this.userService.findOne(username);
     if (user && (await bcrypt.compare(password, user.password))) {
-      const payload: JwtPayload = { username };
+      const name = user.name;
+      const role = 'user';
+      const payload: JwtPayload = { username, role, name };
       const accessToken: string = this.jwtService.sign(payload);
       return { accessToken };
     } else {
