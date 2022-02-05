@@ -14,9 +14,7 @@ export class AuthController {
   }
   //TODO route for signup a new admin
   @Post('signin')
-  signIn(
-    @Body() signInDto: SignInDto,
-  ): Promise<{ accessToken: string; userName: string }> {
+  signIn(@Body() signInDto: SignInDto): Promise<{ accessToken: string }> {
     return this.authService.signIn(signInDto);
   }
 }

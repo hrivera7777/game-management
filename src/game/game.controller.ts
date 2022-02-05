@@ -31,9 +31,9 @@ export class GameController {
   getGames(): Promise<Game[]> {
     return this.gamesService.getGames();
   }
-  @UseGuards(AuthGuard())
   @Roles(UserRole.ADMIN)
   @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard())
   @Patch(':id')
   updateGame(
     @Param('id') id: string,
@@ -41,9 +41,9 @@ export class GameController {
   ): Promise<Game> {
     return this.gamesService.updateGame(id, updateGameDto);
   }
-  @UseGuards(AuthGuard())
   @Roles(UserRole.ADMIN)
   @UseGuards(RolesGuard)
+  @UseGuards(AuthGuard())
   @Delete(':id')
   deleteGame(@Param('id') id: string): Promise<void> {
     return this.gamesService.deleteGame(id);

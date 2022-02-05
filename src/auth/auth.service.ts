@@ -18,16 +18,15 @@ export class AuthService {
     return this.userService.createUser(signUpDto);
   }
 
-  async signIn(
-    signInDto: SignInDto,
-  ): Promise<{ accessToken: string; userName: string }> {
+  async signIn(signInDto: SignInDto): Promise<{ accessToken: string }> {
     const { username, password } = signInDto;
     const user = await this.userService.findOne(username);
     if (user && (await bcrypt.compare(password, user.password))) {
-      const payload: JwtPayload = { username };
+      const name = user.name;
+      const role = 'user';
+      const payload: JwtPayload = { username, role, name };
       const accessToken: string = this.jwtService.sign(payload);
-      const userName = user.name;
-      return { accessToken, userName };
+      return { accessToken };
     } else {
       throw new UnauthorizedException('Please check your login credentials');
     }
