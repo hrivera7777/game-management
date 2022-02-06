@@ -9,7 +9,7 @@ export class SignUpDto {
   username: string;
   @IsNotEmpty()
   @IsString()
-  @Matches(/^\w+@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/, {
+  @Matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, {
     message: 'invalid email',
   })
   email: string;

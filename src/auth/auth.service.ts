@@ -6,6 +6,7 @@ import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './jwt-payload.interface';
 import * as bcrypt from 'bcrypt';
 import { UserService } from 'src/user/user.service';
+import { UserRole } from 'src/user/role.enum';
 
 @Injectable()
 export class AuthService {
@@ -23,7 +24,7 @@ export class AuthService {
     const user = await this.userService.findOne(username);
     if (user && (await bcrypt.compare(password, user.password))) {
       const name = user.name;
-      const role = 'user';
+      const role = UserRole.USER;
       const payload: JwtPayload = { username, role, name };
       const accessToken: string = this.jwtService.sign(payload);
       return { accessToken };
